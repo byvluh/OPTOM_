@@ -1,0 +1,6 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+SQLAlchemy
+PyMySQL
+Werkzeug # Para hashear contraseñas
