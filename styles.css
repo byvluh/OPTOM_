@@ -1,121 +1,158 @@
+:root {
+  --primary-color: #2E7D32;       /* Verde Bosque (Forest Green) */
+  
+  --primary-dark: #1B5E20;        /* Un tono más oscuro para el hover */
+  --primary-darker: #003300;      /* Para el Header (muy oscuro) */
+  --secondary-color: #E8F5E9;     /* Fondo muy suave para hovers */
+  --bg-color: #f4f6f4;            
+  --text-color: #2c3e50;             
+  --text-secondary: #546e7a;      
+  --white: #ffffff;
+  
+  /* Sombra ajustada al nuevo color */
+  --shadow: 0 8px 20px rgba(46, 125, 50, 0.15); 
+}
 
+* {
+  box-sizing: border-box; /* Esto es clave para que el padding no rompa el ancho */
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Evita que aparezca scroll horizontal */
+}
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-   background: #f5f7f5;
-   color: #102a17;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ocupar el 100% de la altura de la ventana */
-    margin: 0;
-    font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 main {
-    flex: 1; /* Esto empuja el footer hacia abajo */
-    /* Tus otros estilos del main (si tienes) pueden ir aquí */
+    flex: 1;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center; /* Esto ayudará a centrar verticalmente tu tarjeta también */
+    align-items: center;
+    padding: 40px 20px;
+    flex-direction: column; /* Agrega esto por si acaso */
 }
 
-/* HEADER MEJORADO */
+/* HEADER REDISEÑADO */
 header {
-  background: #d9e4db;
+  width: 100%;
+  background: var(--primary-darker);
   display: flex;
   align-items: center;
-  justify-content: center; /* Centra los elementos horizontalmente */
-  gap: 15px; /* Espacio entre logo y título */
-  padding: 15px 20px; /* Aumenta el padding para mejor espaciado */
-  border-bottom: 3px solid #274e3b;
+  justify-content: flex-start;
+  gap: 25px;
+  padding: 20px 5%;
+  border-bottom: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: auto;
+  color: var(--white);
+  box-sizing: border-box;
 }
 
 header img {
-  height: 50px; /* Aumenta ligeramente el tamaño del logo */
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
 }
 
 h1 {
-  color: #274e3b;
-  margin: 0; /* Elimina márgenes para mejor control */
-  font-size: 2.2rem; /* Ajusta el tamaño del título */
-  text-align: center;
+  color: var(--white);
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: left;
 }
 
-/* h1 {
-    color: var(--primary);
-    margin-bottom: 10px;
-    font-size: 2.5rem;
-} */
-
 h2 {
-  font-size: 2rem; /* Aumentado para mejor visibilidad */
-  margin-bottom: 15px;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--primary-dark);
+  font-weight: 600;
 }
 
 .subtitle {
-    color: var(--gray);
-    font-size: 1.4rem;
-    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 30px;
 }
 
 p {
-  font-size: 1.1em;
+  font-size: 1.05em;
   font-weight: normal;
-  color: #274e3b;
+  color: var(--text-color);
 }
 
+/* CONTENEDOR PRINCIPAL - ESTILO TARJETA MODERNA */
 .container {
-  width: 80%;
+  width: 100%;
   max-width: 700px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: var(--white);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: var(--shadow);
   text-align: center;
-  font-size: 18px;
 }
 
+/* INDICADOR DE PASOS */
 .step-indicator {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .step {
-  width: 30px;
-  height: 30px;
-  border: 2px solid #274e3b;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #274e3b;
-  font-weight: bold;
-  transition: 0.3s;
+  color: var(--secondary-color);
+  font-weight: 600;
+  background-color: transparent;
+  border: 2px solid var(--secondary-color);
+  transition: all 0.3s ease;
 }
 
 .step.active {
-  background: #274e3b;
-  color: white;
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0, 166, 81, 0.3);
 }
 
 .progress-bar {
-  width: 100%;
-  height: 6px;
-  background-color: #d8e3da;
-  border-radius: 5px;
-  margin: -5px auto 25px auto;
+  width: 80%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin: 0 auto 40px auto;
   overflow: hidden;
 }
 
 .progress {
   height: 100%;
   width: 0%;
-  background-color: #274e3b;
-  transition: width 0.4s ease;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+  transition: width 0.5s ease;
+  border-radius: 10px;
 }
 
 .step-view {
@@ -131,64 +168,108 @@ p {
   transform: translateY(0);
 }
 
+/* OPCIONES DE SELECCIÓN - ESTILO BOTÓN MODERNO */
 .options {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin: 20px 0;
+  margin: 30px 0;
+  flex-wrap: wrap;
 }
 
 .option {
-  padding: 18px 30px;
-  border: 2px solid #274e3b;
+  padding: 20px 30px;
+  border: 2px solid #b0bec5;
   font-size: 1.1em;
-  background: #f3f8f4;
-  color: #1a2d22;
-  border-radius: 10px;
+  background: #f8f9fa;
+  color: var(--text-color);
+  border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  flex: 1 1 200px;
+  max-width: 250px;
 }
 
 .option:hover {
-  background: #1e3a2a;
-  color: white;
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  transform: translateY(-3px);
 }
 
 .option.selected {
-  background: #274e3b !important;
-  color: white !important;
-  border-color: #1e3a2a !important;
+  background: var(--primary-color) !important;
+  color: var(--white) !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 10px 20px rgba(0, 166, 81, 0.3);
+  transform: translateY(-3px) !important;
 }
 
-.option.selected:hover {
-  background: #1e3a2a !important;
-  border-color: #1e3a2a !important;
-}
-
+/* BOTONES DE NAVEGACIÓN */
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 40px;
+}
+
+.buttons.right-aligned {
+    justify-content: flex-end;
 }
 
 button {
-  background: #274e3b;
-  color: white;
   border: none;
-  padding: 12px 30px;
-  border-radius: 8px;
+  padding: 14px 30px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: 0.3s;
-  font-size: 1.1em;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
-button:hover {
-  background: #1e3a2a;
+/* Botones Principales */
+.btn-primary, #next1, #next2, #next3, #next4 {
+  background: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(0, 166, 81, 0.3);
+}
+
+.btn-primary:hover, #next1:hover, #next2:hover, #next3:hover, #next4:hover, .main-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 166, 81, 0.4);
+}
+
+.btn-primary:disabled, #next1:disabled {
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Botón Atrás */
+.back {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 2px solid #b0bec5;
+    font-weight: 600;
+}
+
+.back:hover {
+    background: #eceff1;
+    border-color: var(--text-color);
+    color: var(--text-color);
 }
 
 /* Calendario */
 .calendar-container {
   margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .calendar-header {
@@ -198,47 +279,52 @@ button:hover {
 }
 
 .calendar-header button {
-  background: #274e3b;
+  background: var(--primary-color);
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
+  padding: 0;
+  font-size: 1.2em;
 }
 
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .calendar div {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 12px 0;
+  border-radius: 10px;
   cursor: pointer;
-  background: #f1f5f2;
-  font-size: 1.1em;
+  background: #f8f9fa;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 .calendar div.header {
   background: transparent;
-  font-weight: bold;
+  font-weight: 600;
   cursor: default;
+  color: var(--primary-dark);
 }
 
 .calendar div.day:hover {
-  background: #cde0d1;
+  background: var(--secondary-color);
 }
 
 .calendar div.selected {
-  background: #274e3b;
+  background: var(--primary-color);
   color: white;
+  box-shadow: 0 2px 8px rgba(0, 166, 81, 0.3);
 }
 
 .time-container {
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 .time-slots {
@@ -249,39 +335,55 @@ button:hover {
 }
 
 .time-slot {
-  border: 2px solid #274e3b;
-  border-radius: 8px;
-  padding: 12px 35px;
+  border: 2px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 12px 25px;
   cursor: pointer;
-  background: #f3f8f4;
-  font-size: 1.1em;
+  background: #fff;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+    border-color: var(--primary-color);
+    background: var(--secondary-color);
 }
 
 .time-slot.selected {
-  background: #274e3b;
-  color: white;
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+  box-shadow: 0 5px 15px rgba(0, 166, 81, 0.3);
 }
 
 .time-slot.disabled {
-  background: #ccc;
-  border-color: #aaa;
-  cursor: not-allowed;
+    background-color: #e9ecef !important;
+    color: #adb5bd !important;
+    border-color: #dee2e6 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    opacity: 0.6;
+    text-decoration: line-through;
 }
 
 .summary-box {
-  margin-top: 25px;
+  margin-top: 30px;
   background: #eef3ee;
-  border-left: 4px solid #274e3b;
-  border-radius: 8px;
-  padding: 10px;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 15px;
   font-weight: 500;
+  text-align: left;
 }
 
 footer {
-  background: #d9e4db;
-  padding: 10px;
+  width: 100%;
+  background: var(--primary-darker);
+  color: var(--white);
+  padding: 20px;
   text-align: center;
-  margin-top: 40px;
+  margin-top: auto;
+  font-size: 0.9em;
 }
 
 /* Inputs */
@@ -290,38 +392,50 @@ footer {
     flex-direction: column;
     gap: 15px;
     align-items: center;
+    margin-bottom: 30px;
 }
 input {
-    padding: 12px 15px !important;
-    width: 80%;
-    border: 1px solid #cbd5ce;
-    border-radius: 6px;
-    font-size: 18px !important;
+    padding: 15px 20px !important;
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    font-size: 1em !important;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: var(--text-color);
 }
 
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 166, 81, 0.1);
+}
 
 /* Paso 5 - Confirmación */
 .confirmation-box {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: var(--white);
+  border-radius: 25px;
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  padding: 30px 20px;
+  padding: 0; /* Ya tiene padding del .container */
 }
 
 .circle-icon {
-  width: 70px;
-  height: 70px;
-  background-color: #e2f1e8;
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary-color);
   border-radius: 50%;
-  color: #274e3b;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  margin: 0 auto 15px;
+  font-size: 2.5rem;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 20px rgba(0, 166, 81, 0.3);
 }
 
 .details {
@@ -333,152 +447,325 @@ input {
 }
 
 .detail {
-  background-color: #f3f5f3;
-  border-radius: 10px;
-  padding: 12px 18px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  padding: 15px 20px;
   font-size: 1.05rem;
+  border: 1px solid #e0e0e0;
 }
 
 .detail strong {
-  color: #1e392a;
+  color: var(--primary-dark);
+  font-weight: 600;
 }
 
 .message {
-  color: #333;
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.main-btn {
-  background-color: #274e3b;
-  color: #fff;
-  font-weight: bold;
+.main-btn { /* Estilo para el botón de agendar otra cita */
+  background: var(--primary-color);
+  color: var(--white);
+  font-weight: 600;
   border: none;
-  padding: 12px 30px;
-  border-radius: 10px;
+  padding: 14px 30px;
+  border-radius: 50px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 166, 81, 0.3);
 }
 
-.main-btn:hover {
-  background-color: #356e4f;
-}
-
-.confirmation-card {
-  text-align: center;
-  padding: 30px;
-  background: #f8fdf8;
-  border-radius: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.checkmark {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  background: #4CAF50;
-  position: relative;
-  animation: pop 0.4s ease forwards;
-}
-
-.checkmark::after {
-  content: "";
-  position: absolute;
-  left: 22px;
-  top: 35px;
-  width: 20px;
-  height: 40px;
-  border-right: 4px solid #fff;
-  border-bottom: 4px solid #fff;
-  transform: rotate(45deg);
-  animation: drawCheck 0.4s ease forwards 0.3s;
-  opacity: 0;
-}
-
-@keyframes pop {
-  0% { transform: scale(0); }
-  80% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
-@keyframes drawCheck {
-  0% { opacity: 0; transform: scale(0.8) rotate(45deg); }
-  100% { opacity: 1; transform: scale(1) rotate(45deg); }
-}
-
-.details-grid {
-  display: grid;
-  gap: 10px;
-  margin: 20px 0;
-  text-align: left;
-}
-
-.btn {
-  background-color: #244C38;
-  color: white;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background-color: #1a3627;
-}
-
-.note {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-
-/* SOLUCIÓN DEFINITIVA - FIJAR ESTILOS DE SELECCIÓN */
-.options .option.selected {
-    background: #274e3b !important;
-    color: white !important;
-    border-color: #1e3a2a !important;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(39, 78, 59, 0.3);
-}
-
-.options .option.selected:hover {
-    background: #1e3a2a !important;
-    border-color: #1e3a2a !important;
-    transform: scale(1.05);
-}
-
-/* Botón flotante de WhatsApp - VERSIÓN GRANDE */
+/* Botón flotante de WhatsApp */
 .whatsapp-btn {
     position: fixed;
-    bottom: 30px;       /* Un poco más separado del borde */
+    bottom: 30px;
     right: 30px;
-    
-    /* AUMENTAMOS EL TAMAÑO AQUÍ: */
-    width: 80px;        /* Antes era 60px */
-    height: 80px;       /* Antes era 60px (deben ser iguales para que sea redondo) */
-    font-size: 50px;    /* Icono más grande (antes 35px) */
-    
+    width: 70px; /* Reducimos un poco el tamaño */
+    height: 70px;
+    font-size: 40px;
     background-color: #25d366;
     color: white;
     border-radius: 50%;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    
-    /* Centrar el icono */
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    
     transition: all 0.3s ease;
 }
 
 .whatsapp-btn:hover {
     background-color: #128c7e;
-    transform: scale(1.1); /* Crece aún más al pasar el mouse */
+    transform: scale(1.1);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================= */
+
+/* Para Tablets y Celulares (pantallas menores a 768px) */
+@media (max-width: 768px) {
+
+  /* 1. Ajuste del Contenedor Principal */
+  .container {
+    width: 90%; /* Ocupa más ancho en celular */
+    margin: 20px auto; /* Menos margen vertical */
+    padding: 25px 15px; /* Menos relleno interno para ganar espacio */
+  }
+
+  /* 2. Header (Logo y Título) */
+  header {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  header img {
+    height: 50px; /* Logo un poco más pequeño */
+  }
+
+  h1 {
+    font-size: 1.2rem; /* Título más pequeño para que no ocupe 3 líneas */
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  /* 3. Opciones (Botones grandes) */
+  .options {
+    flex-direction: column; /* Se apilan uno arriba del otro */
+    gap: 15px;
+  }
+
+  .option {
+    width: 100%; /* Ocupan todo el ancho disponible */
+    max-width: none; /* Quitamos el límite de ancho */
+    box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+  }
+
+  /* 4. Calendario */
+  .calendar div {
+    padding: 8px 2px; /* Celdas más compactas */
+    font-size: 0.9em;
+  }
+  
+  .calendar-header h3 {
+    font-size: 1.1em;
+  }
+
+  /* 5. Inputs del formulario */
+  input {
+    max-width: 100%; /* Que no se salgan de la pantalla */
+    box-sizing: border-box;
+  }
+
+  /* 6. Botones de Navegación (Atrás / Siguiente) */
+  .buttons {
+    margin-top: 30px;
+  }
+
+  button {
+    padding: 12px 20px; /* Botones un poco más compactos */
+    font-size: 0.95em;
+  }
+
+  /* 7. Botón de WhatsApp */
+  .whatsapp-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 35px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Para Celulares Muy Pequeños (pantallas menores a 480px) */
+@media (max-width: 480px) {
+  
+  .step-indicator {
+    gap: 8px; /* Juntar más las bolitas de los pasos */
+  }
+
+  .step {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9em;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  /* Ajustar botones inferiores si el texto es largo */
+  .buttons {
+    flex-direction: row; 
+    gap: 10px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    width: auto;
+  }
+  
+  /* El calendario es crítico en pantallas muy chicas */
+  .calendar {
+    gap: 2px;
+  }
+  
+  .calendar div {
+    border-radius: 5px;
+    font-size: 0.85em;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+/* =========================================
+   PANTALLA DE BIENVENIDA (Landing)
+   ========================================= */
+
+/* =========================================
+   PANTALLA DE BIENVENIDA (Landing) - CENTRADO CORREGIDO
+   ========================================= */
+
+.welcome-container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--white);
+    padding: 60px 40px;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.8s ease-out;
+    
+    /* === ESTO ES LO QUE CENTRA TODO === */
+    display: flex;              /* Activa el modo flexible */
+    flex-direction: column;     /* Pone los elementos uno debajo de otro */
+    align-items: center;        /* Centra los elementos horizontalmente */
+    text-align: center;         /* Centra el texto dentro de los elementos */
+    margin: auto;               /* Asegura que la tarjeta esté centrada si sobra espacio */
+}
+
+/* Aseguramos que el contenido interno también use todo el ancho para centrarse */
+.hero-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Icono gigante animado */
+.icon-pulse {
+    font-size: 5rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    display: inline-block;
+    animation: floating 3s ease-in-out infinite;
+}
+
+/* Título */
+.hero-content h1 {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-align: center; /* Refuerzo */
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 30px auto; /* Margin auto ayuda a centrar bloques de texto */
+}
+
+/* Lista de beneficios */
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 40px auto;
+    
+    /* Truco: La lista se centra en la pantalla, pero el texto queda a la izquierda 
+       para que las palomitas se vean alineadas y bonitas */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los items a la izquierda DE LA LISTA */
+    width: fit-content;      /* La lista solo ocupa lo que necesita */
+}
+
+.benefits-list li {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.benefits-list li i {
+    color: var(--primary-color);
+    background: var(--secondary-color);
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    /* Evita que el icono se aplaste si el texto es largo */
+    flex-shrink: 0; 
+}
+
+/* Botón Grande */
+.btn-large {
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
+    transition: all 0.3s ease;
+    /* Asegura que el botón no se estire */
+    width: auto; 
+    max-width: 100%;
+}
+
+/* ANIMACIONES */
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive para la bienvenida */
+@media (max-width: 768px) {
+    .welcome-container {
+        padding: 40px 20px;
+        width: 90%;
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .btn-large {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* FORZAR QUE EL FORMULARIO ESTÉ OCULTO AL INICIO */
+#bookingForm {
+    display: none; /* Esto lo esconde sí o sí */
+}
+
+/* Asegura que el atributo hidden tenga prioridad máxima */
+[hidden] {
+  display: none !important;
 }

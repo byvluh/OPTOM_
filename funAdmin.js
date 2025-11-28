@@ -817,37 +817,35 @@ function updateScheduleForDate(date) {
     
     console.log(`🕒 Actualizando horario para ${dateString}:`, citasDelDia.length, 'citas');
     
-    // Limpiar toda la tabla primero
-    const tableCells = document.querySelectorAll('.schedule-table td');
+    // Limpiar celdas: Restaurar el div .slot.available
+    const tableCells = document.querySelectorAll('.schedule-table td:not(.time-slot)');
     tableCells.forEach(cell => {
-        if (!cell.classList.contains('time-slot')) {
-            cell.innerHTML = 'Disponible';
-            cell.classList.remove('has-appointment', 'completed', 'cancelled', 'programada', 'no-asistió');
-            const oldAppointment = cell.querySelector('.appointment');
-            if(oldAppointment) oldAppointment.removeEventListener('click', showAppointmentDetails);
+        // Restaurar estado vacío
+        cell.innerHTML = '<div class="slot available"></div>';
+        cell.className = ''; // Limpiar clases extras en el TD
+        if(cell.classList.contains('terapia-col')) {
+           cell.classList.add('terapia-col');
         }
     });
     
-    // Llenar tabla con citas del día
     citasDelDia.forEach(cita => {
-        if (!cita.hora) {
-            console.warn(`⚠️ Cita ${cita.id_cita} sin hora definida`);
-            return;
-        }
+        if (!cita.hora) return;
 
         const hora = cita.hora.substring(0, 5);
         const gabineteMatch = cita.gabinete ? cita.gabinete.match(/\d+/) : null;
         const gabineteNum = gabineteMatch ? parseInt(gabineteMatch[0]) : 0;
         
-        if (gabineteNum >= 1 && gabineteNum <= 5) { 
+        if (gabineteNum >= 1 && gabineteNum <= 6) { 
             const timeSlotRow = findTimeSlotRow(hora);
+            
             if (timeSlotRow) {
-                const gabineteCell = timeSlotRow.cells[gabineteNum];
+                const gabineteCell = timeSlotRow.cells[gabineteNum]; // cell index coincide con gabineteNum
+                
                 if (gabineteCell) { 
+                    // Reemplazar el div .slot por el HTML de la cita
                     gabineteCell.innerHTML = createAppointmentHTML(cita);
-                    const statusClass = cita.estado ? cita.estado.toLowerCase().replace(' ', '-') : 'programada';
-                    gabineteCell.classList.add('has-appointment', statusClass);
                     
+                    // Añadir listener
                     const appointmentElement = gabineteCell.querySelector('.appointment');
                     if (appointmentElement) {
                         appointmentElement.addEventListener('click', () => showAppointmentDetails(cita));
@@ -856,9 +854,9 @@ function updateScheduleForDate(date) {
             } 
         }
     });
-    
-    console.log(`✅ Tabla de horarios actualizada para ${dateString}`);
 }
+    
+   
 
 function findTimeSlotRow(hora) {
     const rows = document.querySelectorAll('.schedule-table tbody tr');
@@ -878,16 +876,11 @@ function findTimeSlotRow(hora) {
 function createAppointmentHTML(cita) {
     const statusClass = cita.estado.toLowerCase().replace(' ', '-');
     const nombreCompleto = `${cita.paciente.nombre} ${cita.paciente.apellido}`;
-    const shortName = nombreCompleto.length > 20 ? 
-        nombreCompleto.substring(0, 20) + '...' : nombreCompleto;
     
+    // Versión compacta para la tabla nueva
     return `
-        <div class="appointment ${statusClass}" 
-             data-cita-id="${cita.id_cita}">
-            <div class="patient-name">${shortName}</div>
-            <div class="patient-info">Edad: ${cita.paciente.edad}</div>
-            <div class="patient-info">${cita.motivo}</div>
-            <span class="status ${statusClass}">${cita.estado}</span>
+        <div class="appointment ${statusClass}" title="${nombreCompleto} - ${cita.motivo}">
+            <span class="patient-name">${nombreCompleto}</span>
         </div>
     `;
 }

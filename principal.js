@@ -452,10 +452,26 @@ async function agendarCita() {
         const data = await response.json();
         
         if (response.ok) {
-            alert('Cita agendada con éxito!');
-            return true;
+            // Cita exitosa
+            return true; 
         } else {
-            alert('Error al agendar cita: ' + (data.message || 'Error desconocido.'));
+        if (response.status === 409) {
+                alert('⚠️ Lo sentimos, este horario acaba de ser ocupado por otra persona. Por favor selecciona otra hora.');
+                
+                // 1. Regresar al paso del calendario (Paso 3)
+                showStep(3);
+                
+                // 2. IMPORTANTE: Volver a cargar los horarios para que se actualicen
+                // y ahora sí se pongan en GRIS (bloqueados por tu CSS)
+                if (selectedDate && document.querySelector('.day.selected')) {
+                    selectDate(selectedDate, document.querySelector('.day.selected'));
+                }
+                
+            } else {
+                // Otro tipo de error
+                alert('Error al agendar cita: ' + (data.message || 'Error desconocido.'));
+            }
+            
             console.error('API Error:', data.message);
             return false;
         }
@@ -512,3 +528,45 @@ document.getElementById('newAppointment').addEventListener('click', () => {
 // Inicialización
 generateCalendar(currentDate);
 showStep(1); // Asegura que empiece en el paso 1
+
+// ---------------------------
+// LÓGICA DE PANTALLA DE BIENVENIDA (NUEVO)
+// ---------------------------
+document.addEventListener("DOMContentLoaded", function() {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const bookingForm = document.getElementById('bookingForm');
+    const btnStart = document.getElementById('btnStart');
+
+    // Solo ejecutar si existe el botón
+    if(btnStart) {
+        btnStart.addEventListener('click', function() {
+            // 1. Desvanece la bienvenida
+            welcomeScreen.style.opacity = '0';
+            welcomeScreen.style.transform = 'translateY(-20px)';
+            welcomeScreen.style.transition = 'all 0.5s ease';
+
+            // 2. Espera 0.5 segundos y haz el cambio
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                
+                // === AQUÍ ESTÁ EL CAMBIO CLAVE ===
+                // Quitamos el atributo 'hidden' para que el formulario aparezca
+                if (bookingForm.hasAttribute('hidden')) {
+                    bookingForm.removeAttribute('hidden');
+                }
+
+                // 3. Mostrar el formulario y preparar animación
+                bookingForm.style.display = 'block';
+                bookingForm.style.opacity = '0';
+                bookingForm.style.transform = 'translateY(20px)';
+                
+                // Animación de entrada
+                requestAnimationFrame(() => {
+                    bookingForm.style.transition = 'all 0.5s ease';
+                    bookingForm.style.opacity = '1';
+                    bookingForm.style.transform = 'translateY(0)';
+                });
+            }, 500);
+        });
+    }
+});
